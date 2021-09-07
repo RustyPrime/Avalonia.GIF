@@ -25,11 +25,9 @@ namespace AvaloniaGif
         private GifDecoder _gifDecoder;
         private GifBackgroundWorker _bgWorker;
         private WriteableBitmap _targetBitmap;
-        
         private bool _hasNewFrame;
         private bool _isDisposed;
         private readonly object _bitmapSync = new object();
-        
         public void SetSource(object newValue)
         {
             var sourceUri = newValue as Uri;
@@ -47,7 +45,13 @@ namespace AvaloniaGif
                     var assetLocator = AvaloniaLocator.Current.GetService<IAssetLoader>();
                     stream = assetLocator.Open(sourceUri);
                 }
-
+                else
+                {
+                    if (Path.IsPathRooted(sourceUri.OriginalString)) 
+                    {
+                        stream = File.OpenRead(sourceUri.OriginalString);
+                    }
+                }
             }
             else if (sourceStr != null)
             {
