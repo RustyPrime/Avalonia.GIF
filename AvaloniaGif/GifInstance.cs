@@ -59,7 +59,7 @@ namespace AvaloniaGif
             }
             else
             {
-                throw new InvalidDataException("Missing valid URI or Stream.");
+                return;
             }
 
             Stream = stream;
