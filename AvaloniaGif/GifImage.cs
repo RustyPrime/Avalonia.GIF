@@ -159,7 +159,7 @@ namespace AvaloniaGif
         private static void SourceChanged(AvaloniaPropertyChangedEventArgs e)
         {
             var image = e.Sender as GifImage;
-            if (image == null || image.SourceUri == null || image.SourceUriRaw == null)
+            if (image == null || (image.SourceUri == null && image.SourceUriRaw == null))
                 return;
 
             image.gifInstance?.Dispose();
